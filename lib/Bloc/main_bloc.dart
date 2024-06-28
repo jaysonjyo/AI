@@ -11,10 +11,10 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   late FirstModel  firstModel;
   AiApi aiApi=AiApi();
   MainBloc() : super(MainInitial()) {
-    on<MainEvent>((event, emit) async {
+    on<FetchMainEvent>((event, emit) async {
       emit(MainBlocLoading());
      try{
-       firstModel = await aiApi.getMain();
+       firstModel = await aiApi.getMain(event.id);
        emit(MainBlocLoaded());
      }
          catch(a){ emit(MainBlocError());}

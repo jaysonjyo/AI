@@ -5,13 +5,13 @@ import 'api_client.dart';
 
 class AiApi {
   ApiClient apiClient = ApiClient();
-  Future<FirstModel> getMain() async {
+  Future<FirstModel> getMain(String id) async {
     String trendingpath =
         'https://ai-text-to-image-generator-api.p.rapidapi.com/realistic';
     var body = {
-      "inputs":"Find serenity in the tranquil elegance of a solitary sailboat drifting on a glassy lake at sunset"
+      "inputs":id
     };
-    Response response = await apiClient.invokeAPI(trendingpath, 'POST', body);
+    Response response = await apiClient.invokeAPI(trendingpath, 'POST', jsonEncode(body));
 
     return FirstModel.fromJson(jsonDecode(response.body));
   }
